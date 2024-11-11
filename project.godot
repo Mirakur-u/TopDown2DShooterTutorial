@@ -58,6 +58,10 @@ reload={
 2d_physics/layer_7="pickup"
 2d_physics/layer_8="extract"
 
+[navigation]
+
+2d/default_edge_connection_margin=32.0
+
 [rendering]
 
 2d/snap/snap_2d_transforms_to_pixel=true
