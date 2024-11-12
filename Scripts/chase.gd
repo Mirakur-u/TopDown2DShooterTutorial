@@ -69,3 +69,7 @@ func set_next_chasing_target_point():
 	var navigation_point = NavigationServer2D.map_get_closest_point(navigation_agent_2d.get_navigation_map(), player_position)
 	navigation_agent_2d.target_position = navigation_point
 	
+
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	state_machine.transition_to("Attack")

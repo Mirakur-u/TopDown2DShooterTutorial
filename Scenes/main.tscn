@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://gmdyhveuwqun"]
+[gd_scene load_steps=18 format=3 uid="uid://gmdyhveuwqun"]
 
 [ext_resource type="Texture2D" uid="uid://dn3jopxqgh103" path="res://Assets/spritesheet_tiles.png" id="1_y3e4t"]
 [ext_resource type="PackedScene" uid="uid://bns43fju1obmc" path="res://Scenes/player.tscn" id="2_oq1eo"]
 [ext_resource type="PackedScene" uid="uid://de5pprq5xgqym" path="res://Scenes/zombie_enemy.tscn" id="3_cqcer"]
+[ext_resource type="PackedScene" uid="uid://bkfmq8ny3bcvp" path="res://Scenes/player_ui.tscn" id="4_llaps"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_0d2or"]
 tile_data = PackedInt32Array(0, 1179648, 6, 65536, 1179648, 7, 1, 1245184, 6, 65537, 1245184, 7)
@@ -1136,6 +1137,8 @@ sources/0 = SubResource("TileSetAtlasSource_fkr6x")
 pattern_0 = SubResource("TileMapPattern_0d2or")
 
 [node name="main" type="Node"]
+
+[node name="PlayerUI" parent="." instance=ExtResource("4_llaps")]
 
 [node name="TileMap" type="TileMap" parent="." groups=["tilemap"]]
 position = Vector2(-1, 0)

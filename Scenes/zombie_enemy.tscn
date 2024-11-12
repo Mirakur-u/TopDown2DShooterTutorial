@@ -69,7 +69,15 @@ offset_bottom = 23.0
 target_position = Vector2(174, 0)
 collide_with_areas = true
 
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
+polygon = PackedVector2Array(0, 0, 45, -25, 45, 25)
+
 [connection signal="timeout" from="StateMachine/Idle/IdleTimer" to="StateMachine/Idle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Idle/RotationTimer" to="StateMachine/Idle" method="_on_rotation_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Wandering/WanderingTimer" to="StateMachine/Wandering" method="_on_wandering_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Chase/RandomTargetChaseTimer" to="StateMachine/Chase" method="_on_random_target_chase_timer_timeout"]
+[connection signal="body_entered" from="AttackArea" to="StateMachine/Chase" method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="StateMachine/Attack" method="_on_attack_area_body_exited"]

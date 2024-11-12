@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bns43fju1obmc"]
+[gd_scene load_steps=6 format=3 uid="uid://bns43fju1obmc"]
 
 [ext_resource type="Texture2D" uid="uid://yw36u4xrid7d" path="res://Assets/Scharacter.png" id="1_gl0qj"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_l8vus"]
+[ext_resource type="Script" path="res://Scripts/health_system.gd" id="3_wo33j"]
+[ext_resource type="Script" path="res://Scripts/shooting_system.gd" id="4_i4u51"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e54ov"]
 height = 36.0
@@ -18,3 +20,10 @@ position = Vector2(-12, 0)
 shape = SubResource("CapsuleShape2D_e54ov")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HealthSystem" type="Node" parent="."]
+script = ExtResource("3_wo33j")
+
+[node name="ShootingSystem" type="Marker2D" parent="."]
+position = Vector2(27, 10)
+script = ExtResource("4_i4u51")

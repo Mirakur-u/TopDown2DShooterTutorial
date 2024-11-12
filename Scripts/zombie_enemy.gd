@@ -21,6 +21,14 @@ class_name Zombie
 @export var max_vision_distance = 250
 @export var angle_between_rays = 30
 
+
+@export_group("Attack")
+@export_range(0.1,1) var attack_speed: float = 1
+@export_range(1,10) var attack_damage: float = 3
+
+
+
+
 var current_speed
 
 
@@ -56,3 +64,7 @@ func search_for_player_with_raycast():
 		
 		if vision_ray_cast_2d.is_colliding() && vision_ray_cast_2d.get_collider() is Player:
 			state_machine.transition_to("Chase")
+
+
+func take_damage(damage:int):
+	pass
