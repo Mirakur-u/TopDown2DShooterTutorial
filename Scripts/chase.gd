@@ -9,6 +9,7 @@ const CHANCE_TO_STOP_CHASING = .45
 @onready var navigation_agent_2d: NavigationAgent2D = $"../../NavigationAgent2D"
 @onready var sprite_2d: Sprite2D = $"../../Sprite2D"
 @onready var random_target_chase_timer: RandomTimer = $RandomTargetChaseTimer
+@onready var sounds: Node = $"../../Sounds"
 
 var texture_chase = preload("res://Assets/zombie_walking.png")
 var texture_default = preload("res://Assets/zombie_standing.png")
@@ -17,6 +18,9 @@ func enter(msg = {}) -> void:
 	if owner.is_queued_for_deletion():
 		return
 		
+	var random_stream_player = sounds.get_children().pick_random()
+	random_stream_player.play()
+	
 	sprite_2d.texture = texture_chase
 	owner.current_speed = owner.chasing_speed
 	start_chasing()

@@ -4,7 +4,7 @@ class_name ShootingSystem
 
 signal shot(ammo_in_magazine:int)
 signal gun_reload(ammo_in_magazine:int, ammo_left: int)
-
+signal ammo_added(total_ammo: int)
 
 @export var max_ammo = 40
 @export var total_ammo = 40
@@ -55,3 +55,8 @@ func reload():
 	ammo_in_magazine += reloaded_amount
 	gun_reload.emit(ammo_in_magazine, total_ammo)
 	
+
+func on_ammo_pickup():
+	var ammo_to_add = max_ammo - total_ammo if total_ammo + magazine_size > max_ammo else magazine_size
+	total_ammo += ammo_to_add
+	ammo_added.emit(total_ammo)

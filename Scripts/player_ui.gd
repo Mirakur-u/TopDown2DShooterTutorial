@@ -6,6 +6,10 @@ class_name PlayerUI
 var bullet_texture = preload("res://Assets/bullet_icon.png")
 @onready var ammo_container: VBoxContainer = %"Ammo Container"
 @onready var ammo_left_label: Label = %AmmoLeftLabel
+@onready var key_icon: TextureRect = %KeyIcon
+@onready var extract_counter_label: Label = $MarginContainer/ExtractCounterLabel
+@onready var game_over_label: Label = $GameOverContainer/Panel/VBoxContainer/GameOverLabel
+@onready var game_over_container: CenterContainer = $GameOverContainer
 
 func set_life_bar_max_value(base_health: int):
 	life_bar.max_value = base_health
@@ -40,3 +44,22 @@ func gun_reloaded(ammo_in_magazine: int , total_ammo_left: int):
 		bullet_texture_rect.modulate = Color(Color.WHITE)
 	
 	set_ammo_left(total_ammo_left)
+
+func on_key_pickup():
+	key_icon.show()
+
+func update_extract_timer(time_left: float):
+	if extract_counter_label.hidden:
+		extract_counter_label.show()
+	extract_counter_label.text = "%.2f" %time_left
+
+func hide_extract_countdown():
+	extract_counter_label.hide()
+
+func on_game_over(is_game_lost: bool):
+	if is_game_lost:
+		game_over_label.text = "YOU HAVE DIED!!!"
+	game_over_container.show()
+
+func _on_button_pressed() -> void:
+	get_tree().reload_current_scene()

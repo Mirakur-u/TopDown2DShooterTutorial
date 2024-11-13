@@ -3,6 +3,7 @@ extends State
 class_name AttackState
 
 @onready var sprite_2d: Sprite2D = $"../../Sprite2D"
+@onready var sounds: Node = $"../../Sounds"
 
 var attack_speed
 var attack_damage
@@ -31,6 +32,12 @@ func attack():
 	var player = get_tree().get_first_node_in_group("player")
 	if player and player.has_method("take_damage"):
 		player.take_damage(attack_damage)
+		
+		var random_stream_player = sounds.get_children().pick_random()
+		random_stream_player.play()
+		
+		
+		
 		var attack_tween =  get_tree().create_tween()
 		attack_tween.tween_property(sprite_2d, "modulate", Color(115,0,0,1), .3)
 		attack_tween.chain().tween_property(sprite_2d, "modulate", Color.WHITE, .3)

@@ -1,9 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://gmdyhveuwqun"]
+[gd_scene load_steps=21 format=3 uid="uid://gmdyhveuwqun"]
 
 [ext_resource type="Texture2D" uid="uid://dn3jopxqgh103" path="res://Assets/spritesheet_tiles.png" id="1_y3e4t"]
 [ext_resource type="PackedScene" uid="uid://bns43fju1obmc" path="res://Scenes/player.tscn" id="2_oq1eo"]
 [ext_resource type="PackedScene" uid="uid://de5pprq5xgqym" path="res://Scenes/zombie_enemy.tscn" id="3_cqcer"]
 [ext_resource type="PackedScene" uid="uid://bkfmq8ny3bcvp" path="res://Scenes/player_ui.tscn" id="4_llaps"]
+[ext_resource type="PackedScene" uid="uid://ct64l1ht238d6" path="res://Scenes/ammo_pickup.tscn" id="5_06pep"]
+[ext_resource type="PackedScene" uid="uid://rebtr2r2wcwv" path="res://Scenes/extract.tscn" id="6_ayx8q"]
+[ext_resource type="AudioStream" uid="uid://cqgi64ii7vqsc" path="res://Assets/Sound/pickup.mp3" id="7_4ejuu"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_0d2or"]
 tile_data = PackedInt32Array(0, 1179648, 6, 65536, 1179648, 7, 1, 1245184, 6, 65537, 1245184, 7)
@@ -1157,3 +1160,30 @@ position = Vector2(133, -141)
 
 [node name="ZombieEnemy" parent="." instance=ExtResource("3_cqcer")]
 position = Vector2(563, -83)
+
+[node name="AmmoPickup" parent="." instance=ExtResource("5_06pep")]
+position = Vector2(365, 71)
+
+[node name="Extract" parent="." instance=ExtResource("6_ayx8q")]
+position = Vector2(1658, 1637)
+
+[node name="Extract2" parent="." instance=ExtResource("6_ayx8q")]
+position = Vector2(-1563, 1625)
+
+[node name="Extract3" parent="." instance=ExtResource("6_ayx8q")]
+position = Vector2(-2195, 525)
+rotation = 1.5708
+
+[node name="Extract4" parent="." instance=ExtResource("6_ayx8q")]
+position = Vector2(-2180, -830)
+rotation = 1.5708
+
+[node name="Extract5" parent="." instance=ExtResource("6_ayx8q")]
+position = Vector2(2252, -446)
+rotation = 1.5708
+
+[node name="PickupStreamPlayer" type="AudioStreamPlayer2D" parent="." groups=["pickup_player"]]
+stream = ExtResource("7_4ejuu")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.396889, 0.396889, 0.396889, 1)

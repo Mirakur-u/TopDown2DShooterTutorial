@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bns43fju1obmc"]
+[gd_scene load_steps=9 format=3 uid="uid://bns43fju1obmc"]
 
 [ext_resource type="Texture2D" uid="uid://yw36u4xrid7d" path="res://Assets/Scharacter.png" id="1_gl0qj"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_l8vus"]
 [ext_resource type="Script" path="res://Scripts/health_system.gd" id="3_wo33j"]
 [ext_resource type="Script" path="res://Scripts/shooting_system.gd" id="4_i4u51"]
+[ext_resource type="AudioStream" uid="uid://by4hh2dl1w6jv" path="res://Assets/Sound/pistol-shot.mp3" id="5_ncs3d"]
+[ext_resource type="AudioStream" uid="uid://qccrttgbfnpp" path="res://Assets/Sound/pistol-reload.mp3" id="6_58qjr"]
+[ext_resource type="Texture2D" uid="uid://cnuk62lr18676" path="res://Assets/visibility_mask_1.png" id="7_jyo1i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e54ov"]
 height = 36.0
@@ -27,3 +30,18 @@ script = ExtResource("3_wo33j")
 [node name="ShootingSystem" type="Marker2D" parent="."]
 position = Vector2(27, 10)
 script = ExtResource("4_i4u51")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="ShotStreamPlayer" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("5_ncs3d")
+
+[node name="ReloadStreamPlayer" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_58qjr")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 2
+position = Vector2(-9, 0)
+blend_mode = 2
+texture = ExtResource("7_jyo1i")
+texture_scale = 2.0

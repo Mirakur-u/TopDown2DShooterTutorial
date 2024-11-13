@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkfmq8ny3bcvp"]
+[gd_scene load_steps=4 format=3 uid="uid://bkfmq8ny3bcvp"]
 
 [ext_resource type="Script" path="res://Scripts/player_ui.gd" id="1_kcjk6"]
 [ext_resource type="Theme" uid="uid://o2i6ofsjprkk" path="res://Themes/ui.theme" id="2_j35cp"]
+[ext_resource type="Texture2D" uid="uid://do2olejpfpehe" path="res://Assets/key.png" id="3_rd3sr"]
 
 [node name="PlayerUI" type="CanvasLayer"]
 script = ExtResource("1_kcjk6")
@@ -27,6 +28,7 @@ show_percentage = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 8
 
 [node name="Ammo Container" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -40,3 +42,62 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 40
 text = "/10"
+
+[node name="KeyIcon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("3_rd3sr")
+expand_mode = 2
+
+[node name="ExtractCounterLabel" type="Label" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "10 s"
+
+[node name="GameOverContainer" type="CenterContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="GameOverContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -29.0
+offset_right = 44.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="Label" parent="GameOverContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "You Won!"
+
+[node name="Button" type="Button" parent="GameOverContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Play Again"
+
+[connection signal="pressed" from="GameOverContainer/Panel/VBoxContainer/Button" to="." method="_on_button_pressed"]

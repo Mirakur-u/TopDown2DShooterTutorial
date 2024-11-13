@@ -3,9 +3,13 @@ extends CharacterBody2D
 
 class_name Zombie
 
+var ammo_pickup_scene = preload("res://Scenes/ammo_pickup.tscn")
+var health_pickup_scene = preload("res://Scenes/health_pickup.tscn")
+
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var vision_ray_cast_2d: RayCast2D = $VisionRayCast2D
 @onready var state_machine: StateMachine = $StateMachine
+@onready var health_system: HealthSystem = $HealthSystem
 
 
 @export_group("Locomotion")
@@ -26,6 +30,9 @@ class_name Zombie
 @export_range(0.1,1) var attack_speed: float = 1
 @export_range(1,10) var attack_damage: float = 3
 
+@export_group("Pickups")
+@export var chance_to_drop = .5
+@export var ammo_to_health_pickup_ratio = .6
 
 
 
@@ -38,7 +45,7 @@ func _ready():
 	NavigationServer2D.agent_set_map(navigation_agent_2d.get_rid(), navigation_map)
 	navigation_agent_2d.set_navigation_map(navigation_map)
 	current_speed = wandering_speed
-	
+	health_system.died.connect(on_died)
 
 
 func move_to_position(target_position: Vector2):
@@ -66,5 +73,25 @@ func search_for_player_with_raycast():
 			state_machine.transition_to("Chase")
 
 
+
 func take_damage(damage:int):
-	pass
+	health_system.take_damage(damage)
+
+
+
+func on_died():
+	try_to_drop_pickup.call_deferred()
+	queue_free()
+	
+
+func try_to_drop_pickup():
+	var current_pick_up_drop_chance = randf()
+	if current_pick_up_drop_chance > chance_to_drop:
+		if randf() < ammo_to_health_pickup_ratio:
+			var ammo_pickup = ammo_pickup_scene.instantiate()
+			get_tree().root.add_child(ammo_pickup)
+			ammo_pickup.global_position = global_position
+		else:
+			var health_pickup = health_pickup_scene.instantiate()
+			get_tree().root.add_child(health_pickup)
+			health_pickup.global_position = global_position
